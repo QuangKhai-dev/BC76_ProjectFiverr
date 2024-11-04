@@ -1,0 +1,53 @@
+.input_search {
+  max-width: 531px;
+
+  .ant-input-wrapper {
+    display: flex;
+
+    input {
+      height: 42px;
+      padding: 10px 0 10px 15px;
+      font-size: 18px;
+      border-radius: 2px;
+      flex: 1;
+
+      &:hover {
+        border-color: #d9d9d9;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #d9d9d9;
+        box-shadow: none;
+      }
+    }
+
+    .ant-input-group-addon {
+      display: inline-block;
+      height: 42px;
+      width: 50px;
+
+      button {
+        border: 1px solid black;
+        height: 100%;
+        width: 100%;
+        padding: 15px;
+        background-color: black;
+
+        svg {
+          fill: white;
+        }
+
+        &:hover {
+          background-color: black;
+          border-color: black;
+
+          svg {
+            fill: white;
+          }
+        }
+      }
+    }
+  }
+
+}
