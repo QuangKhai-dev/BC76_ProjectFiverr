@@ -6,8 +6,11 @@ import DropdownHeader from '../../../components/dropdown/DropdownHeader'
 import { ButtonGhost, ButtonOutline } from '../../../components/button/ButtonCustom'
 import { GlobalOutlined } from '@ant-design/icons'
 import InputSearch from '../../../components/input/inputSearch/InputSearch'
+import { useSelector } from 'react-redux'
 
 const HeaderTemplate = () => {
+  const { user } = useSelector((state) => state.userSlice)
+  console.log(user)
   const navigate = useNavigate()
   return (
     <header className='py-4 border-b border-b-gray-200'>
@@ -26,10 +29,12 @@ const HeaderTemplate = () => {
             <DropdownHeader buttonContent='Explore' />
             <ButtonGhost content={"English"} icon={<GlobalOutlined />} />
             <ButtonGhost content={"Become a Seller"} />
-            <ButtonGhost content={"Sign In"} />
-            <ButtonOutline onClick={() => {
-              navigate(pathDefault.signIn)
-            }} content={"Join"} />
+            {!user ? <>
+              <ButtonGhost content={"Sign In"} />
+              <ButtonOutline onClick={() => {
+                navigate(pathDefault.signIn)
+              }} content={"Join"} />
+            </> : <p className='w-max inline-block'>{user.name}</p>}
           </div>
         </div>
       </div>
