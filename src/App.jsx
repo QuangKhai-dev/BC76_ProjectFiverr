@@ -5,6 +5,10 @@ import SignIn from "./pages/SignIn/SignIn";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { createContext } from "react";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import ManagerUser from "./pages/ManagerUser/ManagerUser";
+import ManagerJob from "./pages/ManagerJob/ManagerJob";
+import ManagerComment from "./pages/ManagerComment/ManagerComment";
 
 export const NotificationContext = createContext()
 
@@ -12,10 +16,35 @@ const arrRoutes = [
   {
     path: pathDefault.homePage,
     element: <HomeTemplate />,
+    children: [
+
+    ]
   },
   {
     path: pathDefault.signIn,
     element: <SignIn />
+  },
+  {
+    path: pathDefault.admin,
+    element: <AdminTemplate />,
+    children: [
+      {
+        index: true,
+        element: <ManagerUser />
+      },
+      {
+        path: "manager-user",
+        element: <ManagerUser />
+      },
+      {
+        path: "manager-job",
+        element: <ManagerJob />
+      },
+      {
+        path: "manager-comment",
+        element: <ManagerComment />
+      }
+    ]
   }
 ];
 

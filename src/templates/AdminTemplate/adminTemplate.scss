@@ -1,0 +1,33 @@
+.sider-content {
+  .ant-menu {
+    background-color: unset;
+
+    svg {
+      fill: white;
+      width: 16px;
+      height: 16px;
+    }
+
+    a {
+      color: white;
+      font-weight: 500;
+    }
+
+    .item-active {
+      background-color: red;
+    }
+
+    .ant-menu-item-active {
+      // @apply !bg-gray-400;
+      background-color: unset !important;
+
+      a {
+        @apply text-white;
+      }
+    }
+
+    .ant-menu-item-selected {
+      background-color: unset;
+    }
+  }
+}
