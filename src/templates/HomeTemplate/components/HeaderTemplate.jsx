@@ -102,6 +102,7 @@ const HeaderTemplate = () => {
                 navigate(pathDefault.signIn)
               }} content={"Join"} />
             </> : <p className='w-max inline-block'>{user.name}</p>}
+            <Link to={pathDefault.admin}>Tới giao diện admin</Link>
           </div>
         </div>
       </div>
