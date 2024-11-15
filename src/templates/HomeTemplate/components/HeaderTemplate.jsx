@@ -11,8 +11,10 @@ import { congViecService } from '../../../services/congViec.service'
 import { useDebounce } from 'use-debounce'
 import { Dropdown } from 'antd'
 import './headerTemplate.scss'
+import useViewPort from '../../../hooks/useViewPort'
 
 const HeaderTemplate = () => {
+  const { width } = useViewPort()
   const [keyword, setKeyword] = useState('')
   const [value] = useDebounce(keyword, 1000);
   const [openDropdown, setOpenDropdown] = useState(false)
@@ -42,6 +44,10 @@ const HeaderTemplate = () => {
     }
   }, [value])
 
+  useEffect(() => {
+    // kiểm tra nếu dữ liệu đang lấy từ redux về không có thì sẽ gọi API lấy dữ liệu
+  }, [])
+
   const itemListSearch = useMemo(() => {
     return listSearch.slice(0, 4).map((item, index) => {
       return {
@@ -57,7 +63,7 @@ const HeaderTemplate = () => {
     })
   }, [listSearch])
 
-  return (
+  return width > 576 ? (
     <header className='py-4 border-b border-b-gray-200'>
       <div className="container">
         <div className="header_content flex items-center justify-between">
@@ -66,7 +72,7 @@ const HeaderTemplate = () => {
             <Link to={pathDefault.homePage}>
               <Icons.logo />
             </Link>
-            <Dropdown
+            {width > 576 && <Dropdown
               overlayClassName="dropdown-suggest"
               open={openDropdown}
               menu={{
@@ -79,7 +85,8 @@ const HeaderTemplate = () => {
               <div className='w-full'>
                 <InputSearch handleClick={handleClickInputSearch} handleChange={handleChangeKeyword} value={keyword} placeholder={"What service are you looking for today?"} />
               </div>
-            </Dropdown>
+            </Dropdown>}
+
 
 
           </div>
@@ -99,7 +106,7 @@ const HeaderTemplate = () => {
         </div>
       </div>
     </header>
-  )
+  ) : <div>Tôi nhỏ hơn 576px</div>
 }
 
 export default HeaderTemplate

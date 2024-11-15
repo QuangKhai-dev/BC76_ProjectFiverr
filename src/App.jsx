@@ -1,21 +1,24 @@
 import { useRoutes } from "react-router-dom"
 import { pathDefault } from "./common/path";
-import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
+
 import SignIn from "./pages/SignIn/SignIn";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { createContext } from "react";
+import React, { createContext, Suspense } from "react";
 import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
-import ManagerUser from "./pages/ManagerUser/ManagerUser";
-import ManagerJob from "./pages/ManagerJob/ManagerJob";
-import ManagerComment from "./pages/ManagerComment/ManagerComment";
+
 
 export const NotificationContext = createContext()
+
+const HomeTemplate = React.lazy(() => import("./templates/HomeTemplate/HomeTemplate"))
+const ManagerJob = React.lazy(() => import("./pages/ManagerJob/ManagerJob"))
+const ManagerComment = React.lazy(() => import("./pages/ManagerComment/ManagerComment"))
+const ManagerUser = React.lazy(() => import("./pages/ManagerUser/ManagerUser"))
 
 const arrRoutes = [
   {
     path: pathDefault.homePage,
-    element: <HomeTemplate />,
+    element: <Suspense fallback={<div>huhuh</div>}><HomeTemplate /></Suspense>,
     children: [
 
     ]
@@ -30,19 +33,19 @@ const arrRoutes = [
     children: [
       {
         index: true,
-        element: <ManagerUser />
+        element: <Suspense fallback={<div>huhuh</div>}><ManagerUser /></Suspense>
       },
       {
         path: "manager-user",
-        element: <ManagerUser />
+        element: <Suspense fallback={<div>huhuh</div>}><ManagerUser /></Suspense>
       },
       {
         path: "manager-job",
-        element: <ManagerJob />
+        element: <Suspense fallback={<div>huhuh</div>}><ManagerJob /></Suspense>
       },
       {
         path: "manager-comment",
-        element: <ManagerComment />
+        element: <Suspense fallback={<div>huhuh</div>}><ManagerComment /></Suspense>
       }
     ]
   }

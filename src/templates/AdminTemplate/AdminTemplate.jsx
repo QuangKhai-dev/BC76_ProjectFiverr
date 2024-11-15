@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -20,6 +20,21 @@ const AdminTemplate = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  useEffect(() => {
+    // kiểm tra xem người dùng có đăng nhập chưa
+    const dataString = localStorage.getItem('userInfo')
+    if (!dataString) {
+      // nếu chưa đăng nhập thì chuyển hướng về trang login
+      window.location.href = pathDefault.signIn
+    } else {
+      // kiểm tra xem role có phải là admin hay không
+      const data = JSON.parse(dataString)
+      if (data.user.role !== "ADMIN") {
+        window.location.href = pathDefault.homePage
+      }
+    }
+  }, [])
   return (
     <Layout className='min-h-screen'>
       <Sider width={250} className='bg-orange-300 sider-content' trigger={null} collapsible collapsed={collapsed}>
